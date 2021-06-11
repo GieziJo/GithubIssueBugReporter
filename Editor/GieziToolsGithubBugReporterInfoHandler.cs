@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -38,7 +39,14 @@ public class GieziToolsGithubBugReporterInfoHandler : EditorWindow
 
     public void CreateGUI()
     {
-        _visualElement = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/Editor/GieziToolsGithubBugReporterInfoHandler.uxml").Instantiate();
+        try
+        {
+            _visualElement = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Packages/ch.giezi.tools.githubissuebugreporter/Editor/GieziToolsGithubBugReporterInfoHandler.uxml").Instantiate();
+        }
+        catch
+        {
+            _visualElement = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/Editor/GieziToolsGithubBugReporterInfoHandler.uxml").Instantiate();            
+        }
         rootVisualElement.Add(_visualElement);
         _issuesRepoTokenTextField = _visualElement.Q<TextField>("IssuesRepoToken");
         _imagesRepoTokenTextField = _visualElement.Q<TextField>("ImageRepoToken");
@@ -63,9 +71,9 @@ public class GieziToolsGithubBugReporterInfoHandler : EditorWindow
             _usernameTextField.value = tokens["github-username"];
             _poductHeaderTextField.value = tokens["product-header"];
             _issuesRepoTextField.value = tokens["issues-repo"];
-            _issueLabelTextField.value = tokens["screenshots-repo"];
-            _imageRepoTextField.value = tokens["screenshots-branch"];
-            _screenshotsBranchTextField.value = tokens["custom-label"];
+            _issueLabelTextField.value = tokens["custom-label"];
+            _imageRepoTextField.value = tokens["screenshots-repo"];
+            _screenshotsBranchTextField.value = tokens["screenshots-branch"];
             
         }
 
@@ -140,8 +148,8 @@ public class GieziToolsGithubBugReporterInfoHandler : EditorWindow
         Directory.CreateDirectory(JSON_FILES_PATH);
         File.WriteAllText($"{JSON_FILES_PATH}GithubAccessTokens.json",JsonConvert.SerializeObject(new Dictionary<string, string>()
         {
-            {"github-repo-bug-tracker-token", _issuesRepoTokenTextField.value},
-            {"github-repo-bug-images-token", _imagesRepoTokenTextField.value }
+            {"github-repo-bug-tracker-token", _issuesRepoTokenTextField.text},
+            {"github-repo-bug-images-token", _imagesRepoTokenTextField.text }
         }, Formatting.Indented));
         
         File.WriteAllText($"{JSON_FILES_PATH}.gitignore", "GithubAccessTokens.json\nGithubAccessTokens.json.meta");
@@ -150,12 +158,12 @@ public class GieziToolsGithubBugReporterInfoHandler : EditorWindow
         Directory.CreateDirectory(JSON_FILES_PATH);
         File.WriteAllText($"{JSON_FILES_PATH}GithubInfos.json",JsonConvert.SerializeObject(new Dictionary<string, string>()
         {
-            {"github-username",     _usernameTextField.value},
-            {"product-header",      _poductHeaderTextField.value},
-            {"issues-repo",         _issuesRepoTextField.value},
-            {"screenshots-repo",    _issueLabelTextField.value},
-            {"screenshots-branch",  _imageRepoTextField.value},
-            {"custom-label",        _screenshotsBranchTextField.value},
+            {"github-username",     _usernameTextField.text},
+            {"product-header",      _poductHeaderTextField.text},
+            {"issues-repo",         _issuesRepoTextField.text},
+            {"screenshots-repo",    _imageRepoTextField.text},
+            {"screenshots-branch",  _screenshotsBranchTextField.text},
+            {"custom-label",        _issueLabelTextField.text},
         }, Formatting.Indented));
         
         
