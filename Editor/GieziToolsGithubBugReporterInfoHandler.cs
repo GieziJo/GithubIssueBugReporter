@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using EncryptStringSample;
 using Newtonsoft.Json;
 using UnityEditor;
 using UnityEngine;
@@ -61,8 +62,8 @@ public class GieziToolsGithubBugReporterInfoHandler : EditorWindow
         if (File.Exists($"{JSON_FILES_PATH}GithubAccessTokens.json"))
         {
             Dictionary<string, string> tokens = JsonConvert.DeserializeObject<Dictionary<string, string>>(Resources.Load<TextAsset>("GieziTools.GithubIssueBugReporter/GithubAccessTokens").ToString());
-            _issuesRepoTokenTextField.value = tokens["github-repo-bug-tracker-token"];
-            _imagesRepoTokenTextField.value = tokens["github-repo-bug-images-token"];
+            _issuesRepoTokenTextField.value = StringCipher.Decrypt(tokens["github-repo-bug-tracker-token"]);
+            _imagesRepoTokenTextField.value = StringCipher.Decrypt(tokens["github-repo-bug-images-token"]);
         }
 
         if (File.Exists($"{JSON_FILES_PATH}GithubInfos.json"))
@@ -148,14 +149,12 @@ public class GieziToolsGithubBugReporterInfoHandler : EditorWindow
         Directory.CreateDirectory(JSON_FILES_PATH);
         File.WriteAllText($"{JSON_FILES_PATH}GithubAccessTokens.json",JsonConvert.SerializeObject(new Dictionary<string, string>()
         {
-            {"github-repo-bug-tracker-token", _issuesRepoTokenTextField.text},
-            {"github-repo-bug-images-token", _imagesRepoTokenTextField.text }
+            {"github-repo-bug-tracker-token", StringCipher.Encrypt(_issuesRepoTokenTextField.text)},
+            {"github-repo-bug-images-token", StringCipher.Encrypt(_imagesRepoTokenTextField.text)}
         }, Formatting.Indented));
         
         File.WriteAllText($"{JSON_FILES_PATH}.gitignore", "GithubAccessTokens.json\nGithubAccessTokens.json.meta");
         
-        
-        Directory.CreateDirectory(JSON_FILES_PATH);
         File.WriteAllText($"{JSON_FILES_PATH}GithubInfos.json",JsonConvert.SerializeObject(new Dictionary<string, string>()
         {
             {"github-username",     _usernameTextField.text},

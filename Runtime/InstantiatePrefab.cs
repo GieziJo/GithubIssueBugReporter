@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 
 namespace Giezi.Tools
 {
-    [CreateAssetMenu]
     public class InstantiatePrefab : ScriptableObject
     {
         [SerializeField] private GameObject bugReportAsset;

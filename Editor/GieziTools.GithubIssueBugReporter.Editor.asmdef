@@ -1,7 +1,9 @@
 {
     "name": "GieziTools.GithubIssueBugReporter.Editor",
     "rootNamespace": "",
-    "references": [],
+    "references": [
+        "GUID:f08d97d6302059e45a20f6753dfede78"
+    ],
     "includePlatforms": [
         "Editor"
     ],

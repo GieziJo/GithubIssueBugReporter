@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using EncryptStringSample;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -17,7 +18,7 @@ public static class AccessToken
         if (!(bug_repo_token == null || image_repo_token == null))
             return;
         Dictionary<string, string> tokens = JsonConvert.DeserializeObject<Dictionary<string, string>>(Resources.Load<TextAsset>("GieziTools.GithubIssueBugReporter/GithubAccessTokens").ToString());
-        bug_repo_token = tokens["github-repo-bug-tracker-token"];
-        image_repo_token = tokens["github-repo-bug-images-token"];
+        bug_repo_token = StringCipher.Decrypt(tokens["github-repo-bug-tracker-token"]);
+        image_repo_token = StringCipher.Decrypt(tokens["github-repo-bug-images-token"]);
     }
 }
