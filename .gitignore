@@ -69,3 +69,6 @@ sysinfo.txt
 
 # Log files can be ignored.
 fmod_editor.log
+
+Assets/Resources.meta
+Assets/Resources/
