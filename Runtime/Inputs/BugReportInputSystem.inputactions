@@ -1,0 +1,50 @@
+{
+    "name": "BugReportInputSystem",
+    "maps": [
+        {
+            "name": "ReportBug",
+            "id": "727ef52e-a87f-4880-a92e-30d8186622e1",
+            "actions": [
+                {
+                    "name": "ReportBug",
+                    "type": "Button",
+                    "id": "eb5c2e55-e649-4233-953e-35b0a0669e29",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "cfe0d88e-0428-4a34-a9ed-295235c486a5",
+                    "path": "<Keyboard>/f12",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "ReportBug",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "Keyboard&Mouse",
+            "bindingGroup": "Keyboard&Mouse",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Mouse>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}

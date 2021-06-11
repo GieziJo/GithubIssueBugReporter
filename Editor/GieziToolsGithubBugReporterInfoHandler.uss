@@ -1,0 +1,4 @@
+.Label > .unity-label {
+    display: none;
+    visibility: visible;
+}
