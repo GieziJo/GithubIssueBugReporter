@@ -43,7 +43,7 @@ public class TokenHandler : EditorWindow
         {
             { "github-repo-bug-tracker-token", _issuesRepoTextField.value},
             {"github-repo-bug-images-token", _imagesRepoTextField.value }
-        }));
+        }, Formatting.Indented));
         label.style.display = DisplayStyle.Flex;
     }
 }
