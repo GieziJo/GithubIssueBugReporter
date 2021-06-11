@@ -1,0 +1,10 @@
+{
+    "name": "ch.giezi.tools.githubissuebugreporter",
+    "displayName": "Giezi's Github Issue Bug Reporter",
+    "version": "0.0.0",
+    "unity": "2020.2",
+    "description": "",
+    "keywords": ["Editor", "Bugs"],
+    "category": "Bug",
+    "type": "Bug"
+}
