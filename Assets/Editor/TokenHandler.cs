@@ -41,7 +41,7 @@ public class TokenHandler : EditorWindow
         Directory.CreateDirectory("Assets/Resources/GieziTools.Tokens/");
         File.WriteAllText("Assets/Resources/GieziTools.Tokens/GithubAccessTokens.json",JsonConvert.SerializeObject(new Dictionary<string, string>()
         {
-            { "github-repo-bug-tracker-token", _issuesRepoTextField.value},
+            {"github-repo-bug-tracker-token", _issuesRepoTextField.value},
             {"github-repo-bug-images-token", _imagesRepoTextField.value }
         }, Formatting.Indented));
         label.style.display = DisplayStyle.Flex;

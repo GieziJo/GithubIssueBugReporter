@@ -25,6 +25,6 @@ public static class AccessToken
             return;
         Dictionary<string, string> tokens = JsonConvert.DeserializeObject<Dictionary<string, string>>(Resources.Load<TextAsset>("GieziTools.Tokens/GithubAccessTokens").ToString());
         bug_repo_token = tokens["github-repo-bug-tracker-token"];
-        bug_repo_token = tokens["github-repo-bug-images-token"];
+        image_repo_token = tokens["github-repo-bug-images-token"];
     }
 }
