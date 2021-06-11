@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="TokenHandler.uss" />
+    <ui:VisualElement name="Holder" style="justify-content: space-around; flex-grow: 1; flex-shrink: 0; width: 600px; height: 100px;">
+        <ui:TextField picking-mode="Ignore" label="Token for Issues" name="IssuesRepo" />
+        <ui:TextField picking-mode="Ignore" label="Token for Images" name="ImageRepo" />
+        <ui:Button text="Generate Json" display-tooltip-when-elided="true" name="GenerateJson" />
+        <ui:Label text="Json successfully Generated" display-tooltip-when-elided="true" name="ConfirmationText" style="-unity-text-align: upper-center; color: rgba(49, 135, 243, 255); display: none;" />
+    </ui:VisualElement>
+</ui:UXML>
