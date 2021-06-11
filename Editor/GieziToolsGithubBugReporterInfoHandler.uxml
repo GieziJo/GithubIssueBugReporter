@@ -1,0 +1,25 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="GieziToolsGithubBugReporterInfoHandler.uss" />
+    <ui:VisualElement name="Holder" style="width: 600px; height: 250px; flex-grow: 1; flex-shrink: 0;">
+        <ui:VisualElement name="EnableHolder" style="flex-direction: row; flex-grow: 1; flex-shrink: 0;">
+            <ui:Button text="Enable/Disable Bug Reporter" display-tooltip-when-elided="true" name="activeBugReporter" style="flex-grow: 1;" />
+            <ui:Label text="Status: Enabled" display-tooltip-when-elided="true" name="BurgReporterStatus" style="-unity-text-align: middle-center;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="InfoHolder" style="justify-content: space-around; flex-grow: 1; flex-shrink: 0; width: 600px; height: 200px; visibility: visible; opacity: 1;">
+            <ui:TextField picking-mode="Ignore" label="Repo Owner" name="Username" readonly="false" style="flex-grow: 1;" />
+            <ui:TextField picking-mode="Ignore" label="Product Header" name="ProductHeader" style="flex-grow: 1;" />
+            <ui:VisualElement name="Issues" style="flex-direction: column;">
+                <ui:TextField picking-mode="Ignore" label="Issues Repo Name" name="IssuesRepo" style="flex-grow: 1;" />
+                <ui:TextField picking-mode="Ignore" label="Token for Issues" name="IssuesRepoToken" style="flex-grow: 1;" />
+                <ui:TextField picking-mode="Ignore" label="Issue Label" name="IssueLabel" text="automated-bug" style="flex-grow: 1;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Screenshots" style="flex-direction: column;">
+                <ui:TextField picking-mode="Ignore" label="Screenshots Repo Name" name="ImageRepo" style="flex-grow: 1;" />
+                <ui:TextField picking-mode="Ignore" label="Token for Screenshots" name="ImageRepoToken" style="flex-grow: 1;" />
+                <ui:TextField picking-mode="Ignore" label="Screenshots Branch" name="ScreenshotsBranch" text="Screenshots" style="flex-grow: 1;" />
+            </ui:VisualElement>
+            <ui:Button text="Generate Json" display-tooltip-when-elided="true" name="GenerateJson" />
+            <ui:Label text="Json successfully Generated" display-tooltip-when-elided="true" name="ConfirmationText" style="-unity-text-align: upper-center; color: rgb(49, 135, 243); display: none;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
