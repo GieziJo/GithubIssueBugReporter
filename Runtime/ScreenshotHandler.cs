@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.IO;
 using Unity.Collections;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -8,31 +9,20 @@ namespace Giezi.Tools
 {
     public class ScreenshotHandler : MonoBehaviour
     {
-        public event Action<byte[]> OnScreenshotTakingDone = delegate(byte[] bytes) {  }; 
-        private RenderTexture _currentTexture;
+        public event Action<byte[]> OnScreenshotTakingDone = delegate(byte[] bytes) {  };
         
         IEnumerator WaitForScreenshot()
         {
             yield return new WaitForEndOfFrame();
-
-            _currentTexture = new RenderTexture(Screen.width, Screen.height, 0);
-            ScreenCapture.CaptureScreenshotIntoRenderTexture(_currentTexture);
-            AsyncGPUReadback.Request(_currentTexture, 0, TextureFormat.RGBA32, ReadbackCompleted);
+            
+            Texture2D texture = ScreenCapture.CaptureScreenshotAsTexture();
+            Rect rect = new Rect(0, 0, texture.width, texture.height);
+            texture.ReadPixels(rect,0,0);
+            byte[] bytearray = texture.EncodeToPNG();
+            OnScreenshotTakingDone(bytearray);
+            DestroyImmediate(texture);
         }
 
-        void ReadbackCompleted(AsyncGPUReadbackRequest request)
-        {
-            DestroyImmediate(_currentTexture);
-
-            using (NativeArray<byte> imageBytes = request.GetData<byte>())
-            {
-                OnScreenshotTakingDone(imageBytes.ToArray());
-            }
-        }
-
-        public void TakeScreenShot()
-        {
-            StartCoroutine(WaitForScreenshot());
-        }
+        public void TakeScreenShot() => StartCoroutine(WaitForScreenshot());
     }
 }
