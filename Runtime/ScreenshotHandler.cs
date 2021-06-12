@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections;
+using Unity.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace Giezi.Tools
 {
@@ -7,36 +10,29 @@ namespace Giezi.Tools
     {
         public event Action<byte[]> OnScreenshotTakingDone = delegate(byte[] bytes) {  }; 
         private RenderTexture _currentTexture;
-        private void MyPostRenderer(Camera cam)
+        
+        IEnumerator WaitForScreenshot()
         {
-            if (cam != Camera.main)
-                return;
-        
-            RenderTexture renderTexture = Camera.main.targetTexture;
-            Texture2D renderResult = new Texture2D(renderTexture.width, renderTexture.height, TextureFormat.ARGB32, false);
-            Rect rect = new Rect(0, 0, renderTexture.width, renderTexture.height);
-            renderResult.ReadPixels(rect, 0, 0);
+            yield return new WaitForEndOfFrame();
 
-            byte[] byteArray = renderResult.EncodeToPNG();
-        
-            // System.IO.File.WriteAllBytes(Application.dataPath + "test.png", byteArray);
-        
-            Debug.Log("Screenshot taken");
-        
-            RenderTexture.ReleaseTemporary(renderTexture);
-            Camera.main.targetTexture = _currentTexture;
+            _currentTexture = new RenderTexture(Screen.width, Screen.height, 0);
+            ScreenCapture.CaptureScreenshotIntoRenderTexture(_currentTexture);
+            AsyncGPUReadback.Request(_currentTexture, 0, TextureFormat.RGBA32, ReadbackCompleted);
+        }
 
-            Camera.onPostRender -= MyPostRenderer;
-        
-            OnScreenshotTakingDone(byteArray);
+        void ReadbackCompleted(AsyncGPUReadbackRequest request)
+        {
+            DestroyImmediate(_currentTexture);
+
+            using (NativeArray<byte> imageBytes = request.GetData<byte>())
+            {
+                OnScreenshotTakingDone(imageBytes.ToArray());
+            }
         }
 
         public void TakeScreenShot()
         {
-            _currentTexture = Camera.main.targetTexture;
-            Debug.Log(_currentTexture);
-            Camera.main.targetTexture = RenderTexture.GetTemporary(Camera.main.pixelWidth, Camera.main.pixelHeight, 16);
-            Camera.onPostRender += MyPostRenderer;
+            StartCoroutine(WaitForScreenshot());
         }
     }
 }

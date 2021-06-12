@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/Scripts/Inputs/BugReportInputSystem.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/GithubIssueBugReporter/Runtime/Inputs/BugReportInputSystem.inputactions'
 
 using System;
 using System.Collections;

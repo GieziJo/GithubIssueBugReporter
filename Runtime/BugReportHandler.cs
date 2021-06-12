@@ -60,7 +60,7 @@ namespace Giezi.Tools
 
         private string GenerateBody(string imagePath)
         {
-            string body = $"Bug submitted by: {_canvasHandler.UserName}\n\n"; 
+            string body = $"Bug submitted by: @{_canvasHandler.UserName}\n\n"; 
             body += "Bug description:\n\n";
             body += _canvasHandler.Description;
             body += "\n\n";

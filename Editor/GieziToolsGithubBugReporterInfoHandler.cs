@@ -35,7 +35,7 @@ public class GieziToolsGithubBugReporterInfoHandler : EditorWindow
         GieziToolsGithubBugReporterInfoHandler wnd = GetWindow<GieziToolsGithubBugReporterInfoHandler>();
         wnd.maxSize = new Vector2(600f, 270f);
         wnd.minSize = new Vector2(600f, 270f);
-        wnd.titleContent = new GUIContent("Github Bug Reporter Info Setup");
+        wnd.titleContent = new GUIContent("Github Bug Reporter Setup");
     }
 
     public void CreateGUI()
@@ -46,7 +46,7 @@ public class GieziToolsGithubBugReporterInfoHandler : EditorWindow
         }
         catch
         {
-            _visualElement = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/Editor/GieziToolsGithubBugReporterInfoHandler.uxml").Instantiate();            
+            _visualElement = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/GithubIssueBugReporter/Editor/GieziToolsGithubBugReporterInfoHandler.uxml").Instantiate();            
         }
         rootVisualElement.Add(_visualElement);
         _issuesRepoTokenTextField = _visualElement.Q<TextField>("IssuesRepoToken");
