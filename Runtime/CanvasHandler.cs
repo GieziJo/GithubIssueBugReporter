@@ -40,10 +40,21 @@ namespace Giezi.Tools
 
         public void SubmitBug()
         {
+            SaveInfos();
+            OnSubmitBug();
+        }
+
+        private void SaveInfos()
+        {
             PlayerPrefs.SetString("Giezi.Tools.GithubBugReporter.Username", UserName);
             PlayerPrefs.SetString("Giezi.Tools.GithubBugReporter.GithubUsername", GithubUsername);
             PlayerPrefs.SetInt("Giezi.Tools.GithubBugReporter.githubToggle", GithubToggle ? 1 : 0);
-            OnSubmitBug();
+        }
+
+        public void CancelBug()
+        {
+            SaveInfos();
+            OnCancelBug();
         }
     }
 }
