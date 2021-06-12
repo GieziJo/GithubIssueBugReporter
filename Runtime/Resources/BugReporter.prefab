@@ -4349,7 +4349,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _userName: {fileID: 8003482612250895126}
+  _githubUsername: {fileID: 5888042216796869518}
+  _githubToggle: {fileID: 4846569554253450160}
   _description: {fileID: 8003482612570780032}
+  _title: {fileID: 1211210038024609737}
 --- !u!1 &8003482613578079961
 GameObject:
   m_ObjectHideFlags: 0

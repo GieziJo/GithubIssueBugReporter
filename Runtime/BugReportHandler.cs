@@ -52,7 +52,7 @@ namespace Giezi.Tools
         private void OnSubmitBug()
         {
             string imagePath = UploadImage.UploadImageToGithub(screenshot);
-            string title = $"Automated bug report generate by {_canvasHandler.UserName} ({DateTime.UtcNow.AddHours(1).ToString("f")})";
+            string title = $"[Automated Bug Report] {_canvasHandler.Title} ({_canvasHandler.UserName} - {DateTime.UtcNow.AddHours(1).ToString("f")})";
             string body = GenerateBody(imagePath);
             GithubBugReporter.ReportBug(title, body);
             RestoreNormalGame();
@@ -60,11 +60,16 @@ namespace Giezi.Tools
 
         private string GenerateBody(string imagePath)
         {
-            string body = $"Bug submitted by: @{_canvasHandler.UserName}\n\n"; 
-            body += "Bug description:\n\n";
+            string body = "";
+            body += $"Bug submitted by: ";
+            body += _canvasHandler.GithubToggle ? $"@{_canvasHandler.GithubUsername}" : $"{_canvasHandler.UserName}";
+            body += "\n\n";
+            body += "## Bug description\n\n";
             body += _canvasHandler.Description;
             body += "\n\n";
             body += $"![BugShot]({imagePath})";
+            body += "\n\n";
+            // body += AppendLogFile();
             return body;
         }
 
@@ -79,6 +84,20 @@ namespace Giezi.Tools
             _canvasHandler.OnSubmitBug -= OnSubmitBug;
             canvas.SetActive(false);
             Time.timeScale = 1f;
+        }
+        
+        
+
+        private string AppendLogFile()
+        {
+            string logFileEntry = "";
+            logFileEntry += "<details>";
+            logFileEntry += "<summary>Log File</summary>\n\n";
+            
+            
+            
+            logFileEntry += "\n</details>";
+            return logFileEntry;
         }
     }
 }
