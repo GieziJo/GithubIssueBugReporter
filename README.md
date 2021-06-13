@@ -53,5 +53,6 @@ Make sure the supported devices in the input system settings is either empty or 
 <details>
 <summary>List of known issues</summary>
 
+### [Improve way tokens are stored and accessed](https://github.com/GieziJo/GithubIssueBugReporter/issues/1)
 
 </details>
