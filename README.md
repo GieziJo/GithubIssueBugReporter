@@ -1,4 +1,6 @@
 # Github Issues Bug Reporter
+Bug reporter for Unity which automagically creates a new issue on Github with a screenshot of the current situation in the game, as well as a description provided by the player.
+
 ## Description
 This package allows to push **F12** in game, pause the game and open a bug reporting GUI:
 ![GUI](https://filedn.eu/lgUOHeW73WkzUY76gfcY8s5/EarlyCoffee.Games/Images/Blog/BugReporter/GUI.png)
