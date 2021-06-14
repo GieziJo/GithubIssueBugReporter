@@ -2,8 +2,12 @@
     "name": "ch.giezi.tools.githubissuebugreporter",
     "displayName": "Giezi's Github Issue Bug Reporter",
     "version": "0.0.0",
-    "unity": "2020.2",
-    "description": "",
+    "author": {
+        "name": "Jo Giezi",
+        "url": "https://github.com/GieziJo/GithubIssueBugReporter"
+    },
+    "unity": "2021.1",
+    "description": "Bug reporter for Unity which automagically creates a new issue on Github with a screenshot of the current situation in the game, as well as a description provided by the player.",
     "keywords": ["Editor", "Bugs"],
     "category": "Bug",
     "type": "Bug",
