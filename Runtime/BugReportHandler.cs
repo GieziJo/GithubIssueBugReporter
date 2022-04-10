@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Linq;
 using UnityEngine;
 
 namespace Giezi.Tools
@@ -69,7 +71,8 @@ namespace Giezi.Tools
             body += "\n\n";
             body += $"![BugShot]({imagePath})";
             body += "\n\n";
-            // body += AppendLogFile();
+            if(_canvasHandler.PlayerLogToggle)
+                body += AppendLogFile();
             return body;
         }
 
@@ -93,11 +96,31 @@ namespace Giezi.Tools
             string logFileEntry = "";
             logFileEntry += "<details>";
             logFileEntry += "<summary>Log File</summary>\n\n";
+
+            string log_path;
+#if UNITY_STANDALONE_WIN
+            log_path = CombinePaths(Environment.GetEnvironmentVariable("AppData"), "..", "LocalLow", Application.companyName, Application.productName, "Player.log");
+#elif UNITY_STANDALONE_LINUX
+            log_path = CombinePaths("~/.config/unity3d", Application.companyName, Application.productName, "Player.log");
+#elif UNITY_STANDALONE_OSX
+            log_path = "~/Library/Logs/Unity/Player.log";
+#else
+            return logFileEntry + "\n</details>";
+#endif
             
-            
+            logFileEntry += "\n" + System.IO.File.ReadAllText(logFileEntry);
             
             logFileEntry += "\n</details>";
             return logFileEntry;
+        }
+    
+        string CombinePaths(params string[] paths)
+        {
+            if (paths == null)
+            {
+                throw new ArgumentNullException("paths");
+            }
+            return paths.Aggregate(Path.Combine);
         }
     }
 }
