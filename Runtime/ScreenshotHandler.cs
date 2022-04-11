@@ -1,18 +1,22 @@
 ﻿using System;
 using System.Collections;
-using System.IO;
-using Unity.Collections;
 using UnityEngine;
-using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 namespace Giezi.Tools
 {
     public class ScreenshotHandler : MonoBehaviour
     {
+        private bool useRenderPipelinePostProcessing = false;
         public event Action<byte[]> OnScreenshotTakingDone = delegate(byte[] bytes) {  };
         
         IEnumerator WaitForScreenshot()
         {
+            if (Camera.main.GetUniversalAdditionalCameraData().renderPostProcessing)
+            {
+                useRenderPipelinePostProcessing = true;
+                Camera.main.GetUniversalAdditionalCameraData().renderPostProcessing = false;
+            }
             yield return new WaitForEndOfFrame();
             
             Texture2D texture = ScreenCapture.CaptureScreenshotAsTexture();
@@ -21,6 +25,9 @@ namespace Giezi.Tools
             byte[] bytearray = texture.EncodeToPNG();
             OnScreenshotTakingDone(bytearray);
             DestroyImmediate(texture);
+
+            if (useRenderPipelinePostProcessing)
+                Camera.main.GetUniversalAdditionalCameraData().renderPostProcessing = true;
         }
 
         public void TakeScreenShot() => StartCoroutine(WaitForScreenshot());

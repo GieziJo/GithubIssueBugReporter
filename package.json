@@ -5,7 +5,7 @@
         "name": "Jo Giezi",
         "url": "https://github.com/GieziJo/GithubIssueBugReporter"
     },
-    "version": "0.0.5",
+    "version": "0.0.6",
     "unity": "2021.1",
     "description": "Bug reporter for Unity which automagically creates a new issue on Github with a screenshot of the current situation in the game, as well as a description provided by the player.",
     "keywords": ["Editor", "Bugs"],
@@ -14,6 +14,7 @@
         "com.unity.inputsystem": "1.0.2",
         "com.unity.nuget.newtonsoft-json": "2.0.0",
         "com.unity.textmeshpro": "3.0.1",
+        "com.unity.render-pipelines.universal": "12.1.6",
         "com.unity.ugui": "1.0.0"
     }
 }
