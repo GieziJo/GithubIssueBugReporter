@@ -67,7 +67,7 @@ namespace Giezi.Tools
             string imagePath = UploadImage.UploadImageToGithub(screenshot);
             string title = $"[Automated Bug Report] {_canvasHandler.Title} ({_canvasHandler.UserName} - {DateTime.UtcNow.AddHours(1).ToString("f")})";
             string body = GenerateBody(imagePath);
-            GithubBugReporter.ReportBug(title, body);
+            GithubBugReporter.ReportBug(title, body, Application.version);
             RestoreNormalGame();
         }
 
@@ -76,6 +76,8 @@ namespace Giezi.Tools
             string body = "";
             body += $"Bug submitted by: ";
             body += _canvasHandler.GithubToggle ? $"@{_canvasHandler.GithubUsername}" : $"{_canvasHandler.UserName}";
+            body += "\n\n";
+            body += $"App Version {Application.version}\n\n";
             body += "\n\n";
             body += "## Bug description\n\n";
             body += _canvasHandler.Description;
