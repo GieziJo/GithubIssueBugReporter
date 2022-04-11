@@ -22,6 +22,7 @@ namespace Giezi.Tools
 
         [SerializeField] private TMP_InputField _userName;
         [SerializeField] private TMP_InputField _githubUsername;
+        [SerializeField] private GameObject _githubUserObject;
         [SerializeField] private Toggle _githubToggle;
         [SerializeField] private Toggle _playerLogToggle;
         [SerializeField] private TMP_InputField _description;
@@ -40,15 +41,34 @@ namespace Giezi.Tools
                 _githubToggle.isOn = PlayerPrefs.GetInt("Giezi.Tools.GithubBugReporter.githubToggle") == 1;
             if (PlayerPrefs.HasKey("Giezi.Tools.GithubBugReporter.playerLogToggle"))
                 _playerLogToggle.isOn = PlayerPrefs.GetInt("Giezi.Tools.GithubBugReporter.playerLogToggle") == 1;
+            
+            ToggleState();
+            _githubToggle.onValueChanged.AddListener(delegate { ToggleState(); });
+            
         }
 
+        public void OnDisable() => _githubToggle.onValueChanged.RemoveAllListeners();
+
+        private void ToggleState() => _githubUserObject.SetActive(_githubToggle.isOn);
+
         public void SubmitBug()
+        {
+            SaveInfos();
+            OnSubmitBug();
+        }
+
+        private void SaveInfos()
         {
             PlayerPrefs.SetString("Giezi.Tools.GithubBugReporter.Username", UserName);
             PlayerPrefs.SetString("Giezi.Tools.GithubBugReporter.GithubUsername", GithubUsername);
             PlayerPrefs.SetInt("Giezi.Tools.GithubBugReporter.githubToggle", GithubToggle ? 1 : 0);
             PlayerPrefs.SetInt("Giezi.Tools.GithubBugReporter.playerLogToggle", PlayerLogToggle ? 1 : 0);
-            OnSubmitBug();
+        }
+
+        public void CancelBug()
+        {
+            SaveInfos();
+            OnCancelBug();
         }
     }
 }

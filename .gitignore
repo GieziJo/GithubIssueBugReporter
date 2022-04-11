@@ -1,0 +1,8 @@
+Scenes.meta
+Scenes/
+
+Resources.meta
+Resources/
+
+!Runtime/Resources/
+!Runtime/Resources.meta

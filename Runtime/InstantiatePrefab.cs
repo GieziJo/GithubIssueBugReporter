@@ -4,11 +4,14 @@ namespace Giezi.Tools
 {
     public class InstantiatePrefab
     {
-        [RuntimeInitializeOnLoadMethod]
-        static void OnSceneLoaded()
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+        static void InitialisePrefab()
         {
             if (BugReportHandler.Instance == null)
-                MonoBehaviour.Instantiate(Resources.Load("BugReporter"));
+            {
+                GameObject bugReportAsset = Resources.Load<GameObject>("BugReporter");
+                Object.Instantiate(bugReportAsset);
+            }
         }
     }
 }

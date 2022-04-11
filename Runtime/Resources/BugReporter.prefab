@@ -37,8 +37,13 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
+<<<<<<< HEAD:Runtime/Resources/BugReporter.prefab
   m_AnchoredPosition: {x: 309.99997, y: -122.95123}
   m_SizeDelta: {x: 619.99994, y: 47.07711}
+=======
+  m_AnchoredPosition: {x: 309.99997, y: -114.92109}
+  m_SizeDelta: {x: 619.99994, y: 35.620884}
+>>>>>>> master:Runtime/BugReporter.prefab
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5800871472924236112
 MonoBehaviour:
@@ -122,7 +127,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -0.000030517578, y: 0}
+  m_AnchoredPosition: {x: -20, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &926472205062840359
@@ -196,12 +201,17 @@ RectTransform:
   - {fileID: 8919029709558108761}
   - {fileID: 4250880452853200987}
   m_Father: {fileID: 3229366317166755245}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
+<<<<<<< HEAD:Runtime/Resources/BugReporter.prefab
   m_AnchoredPosition: {x: 568.33325, y: -22.488243}
   m_SizeDelta: {x: 103.33331, y: 44.976486}
+=======
+  m_AnchoredPosition: {x: 68.33332, y: -22.488243}
+  m_SizeDelta: {x: 136.66664, y: 44.976486}
+>>>>>>> master:Runtime/BugReporter.prefab
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4846569554253450160
 MonoBehaviour:
@@ -266,7 +276,7 @@ MonoBehaviour:
   m_IgnoreLayout: 0
   m_MinWidth: -1
   m_MinHeight: -1
-  m_PreferredWidth: 70
+  m_PreferredWidth: 120
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
@@ -281,7 +291,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3229366317166755245}
   - component: {fileID: 4047510257459703606}
-  - component: {fileID: 6073983568355539054}
   m_Layer: 5
   m_Name: GithubInfoHolder
   m_TagString: Untagged
@@ -301,9 +310,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5693690342356941813}
-  - {fileID: 3495120772249121633}
   - {fileID: 1326355120817073329}
+  - {fileID: 2920810586932174651}
   m_Father: {fileID: 1448755970123764498}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -332,32 +340,6 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
---- !u!114 &6073983568355539054
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1761753685029233885}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 0
-  m_Spacing: 0
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 1
-  m_ChildControlHeight: 1
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
 --- !u!1 &2051373917413695492
 GameObject:
   m_ObjectHideFlags: 0
@@ -465,13 +447,13 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3229366317166755245}
+  m_Father: {fileID: 2920810586932174651}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 66.66666, y: 0}
-  m_SizeDelta: {x: 133.33331, y: 44.976486}
+  m_AnchoredPosition: {x: 58.33332, y: 0}
+  m_SizeDelta: {x: 116.66664, y: 44.976486}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &1676604563813780932
 CanvasRenderer:
@@ -725,6 +707,70 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &2805191035438172100
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2920810586932174651}
+  - component: {fileID: 6991947378068905919}
+  m_Layer: 5
+  m_Name: GithubUserHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2920810586932174651
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2805191035438172100}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 5693690342356941813}
+  - {fileID: 3495120772249121633}
+  m_Father: {fileID: 3229366317166755245}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 378.33328, y: -22.488243}
+  m_SizeDelta: {x: 483.33328, y: 44.976486}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &6991947378068905919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2805191035438172100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 1
+  m_ChildControlHeight: 1
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!1 &2966155467215860622
 GameObject:
   m_ObjectHideFlags: 0
@@ -792,7 +838,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Enter your Github Username (optional)...
+  m_text: Enter your Github Username...
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -993,8 +1039,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -11.8951, y: 0}
-  m_SizeDelta: {x: -23.7902, y: 0}
+  m_AnchoredPosition: {x: -32.4779, y: 0}
+  m_SizeDelta: {x: -64.9557, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3610792639273527342
 CanvasRenderer:
@@ -1024,7 +1070,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Mention me in Issue   '
+  m_text: '@ me in issue (notification)'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1058,7 +1104,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 4
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -1605,13 +1651,18 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4743015306507835509}
-  m_Father: {fileID: 3229366317166755245}
+  m_Father: {fileID: 2920810586932174651}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
+<<<<<<< HEAD:Runtime/Resources/BugReporter.prefab
   m_AnchoredPosition: {x: 324.99997, y: 0}
   m_SizeDelta: {x: 383.3333, y: 44.976486}
+=======
+  m_AnchoredPosition: {x: 299.99994, y: 0}
+  m_SizeDelta: {x: 366.66663, y: 44.976486}
+>>>>>>> master:Runtime/BugReporter.prefab
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &3308158315729704238
 CanvasRenderer:
@@ -3684,7 +3735,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Enter your name...
+  m_text: Enter your username...
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4312,7 +4363,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Name:'
+  m_text: 'User:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4675,6 +4726,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _userName: {fileID: 8003482612250895126}
   _githubUsername: {fileID: 5888042216796869518}
+  _githubUserObject: {fileID: 2805191035438172100}
   _githubToggle: {fileID: 4846569554253450160}
   _playerLogToggle: {fileID: 4266513022433301006}
   _description: {fileID: 8003482612570780032}
@@ -4935,7 +4987,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8003482613625725308}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8003482613297447298}
+        m_TargetAssemblyTypeName: Giezi.Tools.CanvasHandler, GieziTools.GithubIssuesBugReporter
+        m_MethodName: CancelBug
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8003482613870629994
 GameObject:
   m_ObjectHideFlags: 0
