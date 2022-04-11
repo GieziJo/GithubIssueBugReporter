@@ -99,6 +99,7 @@ namespace Giezi.Tools
 
             string log_path;
 #if UNITY_STANDALONE_WIN
+                // %USERPROFILE%\AppData\LocalLow\CompanyName\ProductName\Player.log
             log_path = CombinePaths(Environment.GetEnvironmentVariable("AppData"), "..", "LocalLow", Application.companyName, Application.productName, "Player.log");
 #elif UNITY_STANDALONE_LINUX
             log_path = CombinePaths("~/.config/unity3d", Application.companyName, Application.productName, "Player.log");
@@ -108,7 +109,7 @@ namespace Giezi.Tools
             return logFileEntry + "\n</details>";
 #endif
             
-            logFileEntry += "\n" + System.IO.File.ReadAllText(logFileEntry);
+            logFileEntry += "\n" + System.IO.File.ReadAllText(log_path);
             
             logFileEntry += "\n</details>";
             return logFileEntry;
