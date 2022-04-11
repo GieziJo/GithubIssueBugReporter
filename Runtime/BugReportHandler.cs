@@ -48,7 +48,6 @@ namespace Giezi.Tools
             logMessage += logString + "\n";
             
 #if !GIEZI_TOOLS_DISABLE_ON_ERROR_POPUP
-            Debug.Log(type);
             if(type == LogType.Error && PlayerPrefs.GetInt("Giezi.Tools.GithubBugReporter.PopupOnError", 1) == 1)
             {
                 onErrorPopup = true;
