@@ -27,11 +27,14 @@ namespace Giezi.Tools
         [SerializeField] private Toggle _playerLogToggle;
         [SerializeField] private TMP_InputField _description;
         [SerializeField] private TMP_InputField _title;
+        [SerializeField] private GameObject _errorPopupInfo;
+        
 
         public void OnEnable()
         {
             _description.text = "";
             _title.text = "";
+            _errorPopupInfo.SetActive(false);
             
             if (PlayerPrefs.HasKey("Giezi.Tools.GithubBugReporter.Username"))
                 _userName.text = PlayerPrefs.GetString("Giezi.Tools.GithubBugReporter.Username");
@@ -48,6 +51,8 @@ namespace Giezi.Tools
             _githubToggle.onValueChanged.AddListener(delegate { ToggleState(); });
             
         }
+
+        public void EnablePopupInfo() => _errorPopupInfo.SetActive(true);
 
         public void OnDisable() => _githubToggle.onValueChanged.RemoveAllListeners();
 

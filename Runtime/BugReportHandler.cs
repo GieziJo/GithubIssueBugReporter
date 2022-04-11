@@ -74,6 +74,8 @@ namespace Giezi.Tools
             _canvasHandler ??= canvas.GetComponent<CanvasHandler>();
             _canvasHandler.OnCancelBug += OnCancelBug;
             _canvasHandler.OnSubmitBug += OnSubmitBug;
+            if(onErrorPopup)
+                _canvasHandler.EnablePopupInfo();
         }
 
         private void OnSubmitBug()
