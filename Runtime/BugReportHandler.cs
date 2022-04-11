@@ -10,6 +10,7 @@ namespace Giezi.Tools
         [SerializeField] private InputsListener _inputsListener;
         [SerializeField] private ScreenshotHandler _screenshotHandler;
         [SerializeField] private GameObject canvas;
+        private string logMessage;
         private byte[] screenshot;
         private CanvasHandler _canvasHandler;
 
@@ -32,6 +33,16 @@ namespace Giezi.Tools
         private void OnDestroy()
         {
             _inputsListener.ReportBugNow -= ReportBug;
+        }
+        
+        
+        void OnEnable() { Application.logMessageReceived += Log;  }
+
+        void OnDisable() { Application.logMessageReceived -= Log; }
+
+        private void Log(string logString, string stacktrace, LogType type)
+        {
+            logMessage += logString + "\n";
         }
 
         private void ReportBug()
@@ -97,31 +108,10 @@ namespace Giezi.Tools
             logFileEntry += "<details>";
             logFileEntry += "<summary>Log File</summary>\n\n";
 
-            string log_path;
-#if UNITY_STANDALONE_WIN
-                // %USERPROFILE%\AppData\LocalLow\CompanyName\ProductName\Player.log
-            log_path = CombinePaths(Environment.GetEnvironmentVariable("AppData"), "..", "LocalLow", Application.companyName, Application.productName, "Player.log");
-#elif UNITY_STANDALONE_LINUX
-            log_path = CombinePaths("~/.config/unity3d", Application.companyName, Application.productName, "Player.log");
-#elif UNITY_STANDALONE_OSX
-            log_path = "~/Library/Logs/Unity/Player.log";
-#else
-            return logFileEntry + "\n</details>";
-#endif
-            
-            logFileEntry += "\n" + System.IO.File.ReadAllText(log_path);
+            logFileEntry += logMessage;
             
             logFileEntry += "\n</details>";
             return logFileEntry;
-        }
-    
-        string CombinePaths(params string[] paths)
-        {
-            if (paths == null)
-            {
-                throw new ArgumentNullException("paths");
-            }
-            return paths.Aggregate(Path.Combine);
         }
     }
 }
