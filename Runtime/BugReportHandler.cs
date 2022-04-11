@@ -10,10 +10,13 @@ namespace Giezi.Tools
         [SerializeField] private InputsListener _inputsListener;
         [SerializeField] private ScreenshotHandler _screenshotHandler;
         [SerializeField] private GameObject canvas;
-        private string logMessage;
         private byte[] screenshot;
         private CanvasHandler _canvasHandler;
 
+        private string logMessage;
+        private bool onErrorPopup;
+        private string onErrorPopupMsg;
+        
         public static BugReportHandler Instance;
 
         private void Awake()
@@ -43,10 +46,21 @@ namespace Giezi.Tools
         private void Log(string logString, string stacktrace, LogType type)
         {
             logMessage += logString + "\n";
+            
+#if !GIEZI_TOOLS_DISABLE_ON_ERROR_POPUP
+            Debug.Log(type);
+            if(type == LogType.Error && PlayerPrefs.GetInt("Giezi.Tools.GithubBugReporter.PopupOnError", 1) == 1)
+            {
+                onErrorPopup = true;
+                onErrorPopupMsg = logString;
+                ReportBug();
+            }
+#endif
         }
 
         private void ReportBug()
         {
+            _inputsListener.ReportBugNow -= ReportBug;
             Time.timeScale = 0f;
             _screenshotHandler.OnScreenshotTakingDone += ScreenShotResult;
             _screenshotHandler.TakeScreenShot();
@@ -67,7 +81,7 @@ namespace Giezi.Tools
             string imagePath = UploadImage.UploadImageToGithub(screenshot);
             string title = $"[Automated Bug Report] {_canvasHandler.Title} ({_canvasHandler.UserName} - {DateTime.UtcNow.AddHours(1).ToString("f")})";
             string body = GenerateBody(imagePath);
-            GithubBugReporter.ReportBug(title, body, Application.version);
+            GithubBugReporter.ReportBug(title, body, Application.version, onErrorPopup);
             RestoreNormalGame();
         }
 
@@ -79,6 +93,14 @@ namespace Giezi.Tools
             body += "\n\n";
             body += $"App Version {Application.version}\n\n";
             body += "\n\n";
+            
+            if (onErrorPopup)
+            {
+                body += "## Error Message:\n\n";
+                body += $"{onErrorPopupMsg}\n\n";
+                body += "\n\n";
+            }
+
             body += "## Bug description\n\n";
             body += _canvasHandler.Description;
             body += "\n\n";
@@ -96,6 +118,8 @@ namespace Giezi.Tools
 
         private void RestoreNormalGame()
         {
+            _inputsListener.ReportBugNow += ReportBug;
+            onErrorPopup = false;
             _canvasHandler.OnCancelBug -= OnCancelBug;
             _canvasHandler.OnSubmitBug -= OnSubmitBug;
             canvas.SetActive(false);
