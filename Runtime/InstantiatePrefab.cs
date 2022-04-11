@@ -1,23 +1,14 @@
-﻿using System;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
 namespace Giezi.Tools
 {
-    public class InstantiatePrefab : ScriptableObject
+    public class InstantiatePrefab
     {
-        [SerializeField] private GameObject bugReportAsset;
-
-        private void OnEnable()
+        [RuntimeInitializeOnLoadMethod]
+        static void OnSceneLoaded()
         {
-            SceneManager.sceneLoaded -= OnSceneLoaded;
-            SceneManager.sceneLoaded += OnSceneLoaded;
-        }
-
-        private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
-        {
-            if(BugReportHandler.Instance == null)
-                Instantiate(bugReportAsset);
+            if (BugReportHandler.Instance == null)
+                MonoBehaviour.Instantiate(Resources.Load("BugReporter"));
         }
     }
 }

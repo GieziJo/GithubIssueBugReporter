@@ -1,7 +1,11 @@
 {
     "name": "ch.giezi.tools.githubissuebugreporter",
     "displayName": "Giezi's Github Issue Bug Reporter",
-    "version": "0.0.0",
+    "author": {
+        "name": "Jo Giezi",
+        "url": "https://github.com/GieziJo/GithubIssueBugReporter"
+    },
+    "version": "0.0.1",
     "unity": "2020.2",
     "description": "",
     "keywords": ["Editor", "Bugs"],
