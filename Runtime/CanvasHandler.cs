@@ -36,9 +36,11 @@ namespace Giezi.Tools
             if (PlayerPrefs.HasKey("Giezi.Tools.GithubBugReporter.Username"))
                 _userName.text = PlayerPrefs.GetString("Giezi.Tools.GithubBugReporter.Username");
             if (PlayerPrefs.HasKey("Giezi.Tools.GithubBugReporter.GithubUsername"))
-                _userName.text = PlayerPrefs.GetString("Giezi.Tools.GithubBugReporter.GithubUsername");
+                _githubUsername.text = PlayerPrefs.GetString("Giezi.Tools.GithubBugReporter.GithubUsername");
             if (PlayerPrefs.HasKey("Giezi.Tools.GithubBugReporter.githubToggle"))
                 _githubToggle.isOn = PlayerPrefs.GetInt("Giezi.Tools.GithubBugReporter.githubToggle") == 1;
+            else
+                _githubToggle.isOn = false;
             if (PlayerPrefs.HasKey("Giezi.Tools.GithubBugReporter.playerLogToggle"))
                 _playerLogToggle.isOn = PlayerPrefs.GetInt("Giezi.Tools.GithubBugReporter.playerLogToggle") == 1;
             

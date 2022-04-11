@@ -37,13 +37,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-<<<<<<< HEAD:Runtime/Resources/BugReporter.prefab
   m_AnchoredPosition: {x: 309.99997, y: -122.95123}
   m_SizeDelta: {x: 619.99994, y: 47.07711}
-=======
-  m_AnchoredPosition: {x: 309.99997, y: -114.92109}
-  m_SizeDelta: {x: 619.99994, y: 35.620884}
->>>>>>> master:Runtime/BugReporter.prefab
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5800871472924236112
 MonoBehaviour:
@@ -205,13 +200,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-<<<<<<< HEAD:Runtime/Resources/BugReporter.prefab
-  m_AnchoredPosition: {x: 568.33325, y: -22.488243}
-  m_SizeDelta: {x: 103.33331, y: 44.976486}
-=======
   m_AnchoredPosition: {x: 68.33332, y: -22.488243}
   m_SizeDelta: {x: 136.66664, y: 44.976486}
->>>>>>> master:Runtime/BugReporter.prefab
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4846569554253450160
 MonoBehaviour:
@@ -291,6 +281,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3229366317166755245}
   - component: {fileID: 4047510257459703606}
+  - component: {fileID: 9188164522138692607}
   m_Layer: 5
   m_Name: GithubInfoHolder
   m_TagString: Untagged
@@ -340,6 +331,32 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &9188164522138692607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1761753685029233885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 4
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 1
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!1 &2051373917413695492
 GameObject:
   m_ObjectHideFlags: 0
@@ -734,6 +751,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5693690342356941813}
   - {fileID: 3495120772249121633}
@@ -1656,13 +1674,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-<<<<<<< HEAD:Runtime/Resources/BugReporter.prefab
-  m_AnchoredPosition: {x: 324.99997, y: 0}
-  m_SizeDelta: {x: 383.3333, y: 44.976486}
-=======
   m_AnchoredPosition: {x: 299.99994, y: 0}
   m_SizeDelta: {x: 366.66663, y: 44.976486}
->>>>>>> master:Runtime/BugReporter.prefab
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &3308158315729704238
 CanvasRenderer:
