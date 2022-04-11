@@ -1,9 +1,13 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="GieziToolsGithubBugReporterInfoHandler.uss" />
+    <Style src="project://database/Assets/GithubIssueBugReporter/Editor/GieziToolsGithubBugReporterInfoHandler.uss?fileID=7433441132597879392&amp;guid=e7a3bfaac142978449705765c5973310&amp;type=3#GieziToolsGithubBugReporterInfoHandler" />
     <ui:VisualElement name="Holder" style="width: 600px; height: 250px; flex-grow: 1; flex-shrink: 0;">
         <ui:VisualElement name="EnableHolder" style="flex-direction: row; flex-grow: 1; flex-shrink: 0;">
             <ui:Button text="Enable/Disable Bug Reporter" display-tooltip-when-elided="true" name="activeBugReporter" style="flex-grow: 1;" />
             <ui:Label text="Status: Enabled" display-tooltip-when-elided="true" name="BurgReporterStatus" style="-unity-text-align: middle-center;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="EnablePopupHolder" style="flex-direction: row; flex-grow: 1; flex-shrink: 0;">
+            <ui:Button text="Enable/Disable On Error Popup" display-tooltip-when-elided="true" name="activePopup" tooltip="Should the bug reporting tool popup when an error occurs" style="flex-grow: 1;" />
+            <ui:Label text="Status: Enabled" display-tooltip-when-elided="true" name="PopupStatus" style="-unity-text-align: middle-center;" />
         </ui:VisualElement>
         <ui:VisualElement name="InfoHolder" style="justify-content: space-around; flex-grow: 1; flex-shrink: 0; width: 600px; height: 200px; visibility: visible; opacity: 1;">
             <ui:TextField picking-mode="Ignore" label="Repo Owner" name="Username" readonly="false" style="flex-grow: 1;" />

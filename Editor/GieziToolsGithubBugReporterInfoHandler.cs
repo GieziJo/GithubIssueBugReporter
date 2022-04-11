@@ -23,8 +23,10 @@ public class GieziToolsGithubBugReporterInfoHandler : EditorWindow
     private Button _generateJsonButton;
 
     private bool state = false;
+    private bool popupState = true;
     private VisualElement _visualElement;
     private const string BUG_REPORTER_DEFINE = "GIEZI_TOOLS_ENABLE_BUG_REPORTER";
+    private const string POPUP_DEFINE = "GIEZI_TOOLS_DISABLE_ON_ERROR_POPUP";
 
 
     private const string JSON_FILES_PATH = "Assets/Resources/GieziTools.GithubIssueBugReporter/";
@@ -82,6 +84,32 @@ public class GieziToolsGithubBugReporterInfoHandler : EditorWindow
         _generateJsonButton.clicked += () => GenerateJson(_visualElement.Q<Label>("ConfirmationText"));
 
         SetupChangeOfStatus();
+        SetupChangeOfStatusPopup();
+    }
+
+    private void SetupChangeOfStatusPopup()
+    {
+        CheckPopupState();
+        _visualElement.Q<Button>("activePopup").clicked += OnPopupStateChangedClicked;
+        UpdatePopupState();
+    }
+
+    private void CheckPopupState()
+    {
+        popupState = !PlayerSettings.GetScriptingDefineSymbolsForGroup(BuildTargetGroup.Standalone).Split(';').ToList().Contains(POPUP_DEFINE);
+    }
+
+    private void UpdatePopupState()
+    {
+        _visualElement.Q<Label>("PopupStatus").text = "Status: " + (popupState ? "Enabled" : "Disabled");
+        _visualElement.Q<Button>("activePopup").text = (popupState ? "Disable" : "Enable") + " On Error Popup";
+    }
+
+    private void OnPopupStateChangedClicked()
+    {
+        popupState = !popupState;
+        UpdatePopupState();
+        UpdateDefines();
     }
 
     private void SetupChangeOfStatus()
@@ -130,17 +158,25 @@ public class GieziToolsGithubBugReporterInfoHandler : EditorWindow
         if (state && !definesList.Contains(BUG_REPORTER_DEFINE))
         {
             definesList.Add(BUG_REPORTER_DEFINE);
-            string newDefines = string.Join(";",definesList);
-            PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.Standalone, newDefines);
             
         }
         else if (!state && definesList.Contains(BUG_REPORTER_DEFINE))
         {
             definesList.Remove(BUG_REPORTER_DEFINE);
-            string newDefines = string.Join(";",definesList);
-            PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.Standalone,
-                newDefines);
         }
+
+        if (!popupState && !definesList.Contains(POPUP_DEFINE))
+        {
+            definesList.Add(POPUP_DEFINE);
+            
+        }
+        else if (popupState && definesList.Contains(POPUP_DEFINE))
+        {
+            definesList.Remove(POPUP_DEFINE);
+        }
+        
+        string newDefines = string.Join(";",definesList);
+        PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.Standalone, newDefines);
     }
 
 
