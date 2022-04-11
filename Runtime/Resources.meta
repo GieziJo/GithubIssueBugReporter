@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Runtime/Resources.meta
+guid: 034edde716997da4a8ec0cc6fa436114
+=======
 guid: 449aad12e883b2f4781a7849eeb56191
+>>>>>>> master:Runtime/InstantiatePrefab.asset.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

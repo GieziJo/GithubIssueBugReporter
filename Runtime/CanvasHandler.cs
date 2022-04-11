@@ -14,6 +14,7 @@ namespace Giezi.Tools
         public string Description => _description.text;
 
         public bool GithubToggle => _githubToggle.isOn;
+        public bool PlayerLogToggle => _playerLogToggle.isOn;
 
         public string GithubUsername => _githubUsername.text;
         
@@ -23,6 +24,7 @@ namespace Giezi.Tools
         [SerializeField] private TMP_InputField _githubUsername;
         [SerializeField] private GameObject _githubUserObject;
         [SerializeField] private Toggle _githubToggle;
+        [SerializeField] private Toggle _playerLogToggle;
         [SerializeField] private TMP_InputField _description;
         [SerializeField] private TMP_InputField _title;
 
@@ -34,9 +36,13 @@ namespace Giezi.Tools
             if (PlayerPrefs.HasKey("Giezi.Tools.GithubBugReporter.Username"))
                 _userName.text = PlayerPrefs.GetString("Giezi.Tools.GithubBugReporter.Username");
             if (PlayerPrefs.HasKey("Giezi.Tools.GithubBugReporter.GithubUsername"))
-                _userName.text = PlayerPrefs.GetString("Giezi.Tools.GithubBugReporter.GithubUsername");
+                _githubUsername.text = PlayerPrefs.GetString("Giezi.Tools.GithubBugReporter.GithubUsername");
             if (PlayerPrefs.HasKey("Giezi.Tools.GithubBugReporter.githubToggle"))
                 _githubToggle.isOn = PlayerPrefs.GetInt("Giezi.Tools.GithubBugReporter.githubToggle") == 1;
+            else
+                _githubToggle.isOn = false;
+            if (PlayerPrefs.HasKey("Giezi.Tools.GithubBugReporter.playerLogToggle"))
+                _playerLogToggle.isOn = PlayerPrefs.GetInt("Giezi.Tools.GithubBugReporter.playerLogToggle") == 1;
             
             ToggleState();
             _githubToggle.onValueChanged.AddListener(delegate { ToggleState(); });
@@ -58,6 +64,7 @@ namespace Giezi.Tools
             PlayerPrefs.SetString("Giezi.Tools.GithubBugReporter.Username", UserName);
             PlayerPrefs.SetString("Giezi.Tools.GithubBugReporter.GithubUsername", GithubUsername);
             PlayerPrefs.SetInt("Giezi.Tools.GithubBugReporter.githubToggle", GithubToggle ? 1 : 0);
+            PlayerPrefs.SetInt("Giezi.Tools.GithubBugReporter.playerLogToggle", PlayerLogToggle ? 1 : 0);
         }
 
         public void CancelBug()

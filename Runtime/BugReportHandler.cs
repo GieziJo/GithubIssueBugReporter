@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Linq;
 using UnityEngine;
 
 namespace Giezi.Tools
@@ -8,6 +10,7 @@ namespace Giezi.Tools
         [SerializeField] private InputsListener _inputsListener;
         [SerializeField] private ScreenshotHandler _screenshotHandler;
         [SerializeField] private GameObject canvas;
+        private string logMessage;
         private byte[] screenshot;
         private CanvasHandler _canvasHandler;
 
@@ -30,6 +33,16 @@ namespace Giezi.Tools
         private void OnDestroy()
         {
             _inputsListener.ReportBugNow -= ReportBug;
+        }
+        
+        
+        void OnEnable() { Application.logMessageReceived += Log;  }
+
+        void OnDisable() { Application.logMessageReceived -= Log; }
+
+        private void Log(string logString, string stacktrace, LogType type)
+        {
+            logMessage += logString + "\n";
         }
 
         private void ReportBug()
@@ -69,7 +82,8 @@ namespace Giezi.Tools
             body += "\n\n";
             body += $"![BugShot]({imagePath})";
             body += "\n\n";
-            // body += AppendLogFile();
+            if(_canvasHandler.PlayerLogToggle)
+                body += AppendLogFile();
             return body;
         }
 
@@ -93,8 +107,8 @@ namespace Giezi.Tools
             string logFileEntry = "";
             logFileEntry += "<details>";
             logFileEntry += "<summary>Log File</summary>\n\n";
-            
-            
+
+            logFileEntry += logMessage;
             
             logFileEntry += "\n</details>";
             return logFileEntry;
