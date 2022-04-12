@@ -10,6 +10,7 @@ namespace Giezi.Tools
         [SerializeField] private InputsListener _inputsListener;
         [SerializeField] private ScreenshotHandler _screenshotHandler;
         [SerializeField] private GameObject canvas;
+        [SerializeField] private GameObject bugReportedCanvas;
         private byte[] screenshot;
         private CanvasHandler _canvasHandler;
 
@@ -18,6 +19,7 @@ namespace Giezi.Tools
         private string onErrorPopupMsg;
         
         public static BugReportHandler Instance;
+        private bool handleInBackground = false;
 
         private void Awake()
         {
@@ -52,6 +54,7 @@ namespace Giezi.Tools
             {
                 onErrorPopup = true;
                 onErrorPopupMsg = logString;
+                handleInBackground = PlayerPrefs.GetInt("Giezi.Tools.GithubBugReporter.ErrorPopupInBackground", 0) == 1;
                 ReportBug();
             }
 #endif
@@ -69,26 +72,57 @@ namespace Giezi.Tools
         {
             _screenshotHandler.OnScreenshotTakingDone -= ScreenShotResult;
             this.screenshot = screenshot;
+            
+            if (onErrorPopup && handleInBackground)
+            {
+                OnSubmitBug();
+                return;
+            }
+
             canvas.SetActive(true);
             _canvasHandler ??= canvas.GetComponent<CanvasHandler>();
             _canvasHandler.OnCancelBug += OnCancelBug;
             _canvasHandler.OnSubmitBug += OnSubmitBug;
-            if(onErrorPopup)
+            if (onErrorPopup)
                 _canvasHandler.EnablePopupInfo();
         }
 
         private void OnSubmitBug()
         {
             string imagePath = UploadImage.UploadImageToGithub(screenshot);
-            string title = $"[Automated Bug Report] {_canvasHandler.Title} ({_canvasHandler.UserName} - {DateTime.UtcNow.AddHours(1).ToString("f")})";
+            string title = GetTitle();
             string body = GenerateBody(imagePath);
             GithubBugReporter.ReportBug(title, body, Application.version, onErrorPopup);
             RestoreNormalGame();
         }
 
+        private string GetTitle()
+        {
+            if (onErrorPopup && handleInBackground)
+                return $"[Automated Bug Report in  Background] ({DateTime.UtcNow.AddHours(1).ToString("f")})";
+            return $"[Automated Bug Report] {_canvasHandler.Title} ({_canvasHandler.UserName} - {DateTime.UtcNow.AddHours(1).ToString("f")})";
+        }
+
         private string GenerateBody(string imagePath)
         {
             string body = "";
+            if (onErrorPopup && handleInBackground)
+            {
+                body += "## Background bug report\n\n";
+                body += "\n\n";
+                body += $"App Version {Application.version}\n\n";
+                body += "\n\n";
+                body += "## Error Message:\n\n";
+                body += $"{onErrorPopupMsg}\n\n";
+                body += "\n\n";
+                body += "\n\n";
+                body += $"![BugShot]({imagePath})";
+                body += "\n\n";
+                body += AppendLogFile();
+                
+                return body;
+            }
+            
             body += $"Bug submitted by: ";
             body += _canvasHandler.GithubToggle ? $"@{_canvasHandler.GithubUsername}" : $"{_canvasHandler.UserName}";
             body += "\n\n";
@@ -109,6 +143,7 @@ namespace Giezi.Tools
             body += "\n\n";
             if(_canvasHandler.PlayerLogToggle)
                 body += AppendLogFile();
+            
             return body;
         }
 
@@ -119,11 +154,21 @@ namespace Giezi.Tools
 
         private void RestoreNormalGame()
         {
+            if (onErrorPopup && handleInBackground)
+                bugReportedCanvas.SetActive(true);
+            else
+            {
+                _canvasHandler.OnCancelBug -= OnCancelBug;
+                _canvasHandler.OnSubmitBug -= OnSubmitBug;
+                canvas.SetActive(false);
+            }
+
             _inputsListener.ReportBugNow += ReportBug;
+            
+            
             onErrorPopup = false;
-            _canvasHandler.OnCancelBug -= OnCancelBug;
-            _canvasHandler.OnSubmitBug -= OnSubmitBug;
-            canvas.SetActive(false);
+            handleInBackground = false;
+            
             Time.timeScale = 1f;
         }
         
