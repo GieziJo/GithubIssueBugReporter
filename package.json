@@ -5,10 +5,13 @@
         "name": "Jo Giezi",
         "url": "https://github.com/GieziJo/GithubIssueBugReporter"
     },
-    "version": "0.0.10",
+    "version": "0.0.11",
     "unity": "2021.1",
     "description": "Bug reporter for Unity which automagically creates a new issue on Github with a screenshot of the current situation in the game, as well as a description provided by the player.",
-    "keywords": ["Editor", "Bugs"],
+    "keywords": [
+        "Editor",
+        "Bugs"
+    ],
     "category": "Bug",
     "dependencies": {
         "com.unity.inputsystem": "1.0.2",
