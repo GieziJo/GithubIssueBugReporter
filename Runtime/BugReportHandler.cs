@@ -69,9 +69,9 @@ namespace Giezi.Tools
             _inputsListener.ReportBugNow -= ReportBug;
             _previousTimeScale = Time.timeScale;
             Time.timeScale = 0f;
-            _previousMouseLock = Cursor.None;
+            _previousMouseLock = Cursor.lockState;
             _previousMouseVisibility = Cursor.visible;
-            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.lockState = CursorLockMode.None;
             Cursor.visible = false;
             _screenshotHandler.OnScreenshotTakingDone += ScreenShotResult;
             _screenshotHandler.TakeScreenShot();
