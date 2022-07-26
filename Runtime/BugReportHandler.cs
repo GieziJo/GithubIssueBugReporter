@@ -69,7 +69,7 @@ namespace Giezi.Tools
             _inputsListener.ReportBugNow -= ReportBug;
             _previousTimeScale = Time.timeScale;
             Time.timeScale = 0f;
-            _previousMouseLock = Cursor.lockState;
+            _previousMouseLock = Cursor.None;
             _previousMouseVisibility = Cursor.visible;
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
