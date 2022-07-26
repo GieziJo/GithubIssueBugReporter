@@ -72,7 +72,7 @@ namespace Giezi.Tools
             _previousMouseLock = Cursor.lockState;
             _previousMouseVisibility = Cursor.visible;
             Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = false;
+            Cursor.visible = true;
             _screenshotHandler.OnScreenshotTakingDone += ScreenShotResult;
             _screenshotHandler.TakeScreenShot();
         }
