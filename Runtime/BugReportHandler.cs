@@ -101,7 +101,7 @@ namespace Giezi.Tools
             string imagePath = UploadImage.UploadImageToGithub(screenshot);
             string title = GetTitle();
             string body = GenerateBody(imagePath);
-            GithubBugReporter.ReportBug(title, body, Application.version, onErrorPopup);
+            GithubBugReporter.ReportBug(title, body, Application.version, Application.platform.ToString(), onErrorPopup);
             RestoreNormalGame();
         }
 
