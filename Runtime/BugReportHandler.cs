@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Giezi.Tools
 {
@@ -24,6 +26,8 @@ namespace Giezi.Tools
         private float _previousTimeScale = 1f;
         private CursorLockMode _previousMouseLock = CursorLockMode.None;
         private bool _previousMouseVisibility = true;
+        [SerializeField] private EventSystem _thisEventSystem;
+        private Dictionary<EventSystem, bool> _eventSystemDictionary;
 
         private void Awake()
         {
@@ -51,7 +55,7 @@ namespace Giezi.Tools
 
         private void Log(string logString, string stacktrace, LogType type)
         {
-            logMessage += logString + "\n";
+            logMessage += logString + stacktrace + "\n";
             
 #if !GIEZI_TOOLS_DISABLE_ON_ERROR_POPUP
             if(type == LogType.Error && PlayerPrefs.GetInt("Giezi.Tools.GithubBugReporter.PopupOnError", 1) == 1)
@@ -67,12 +71,7 @@ namespace Giezi.Tools
         private void ReportBug()
         {
             _inputsListener.ReportBugNow -= ReportBug;
-            _previousTimeScale = Time.timeScale;
-            Time.timeScale = 0f;
-            _previousMouseLock = Cursor.lockState;
-            _previousMouseVisibility = Cursor.visible;
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            SetupGameForBugReport();
             _screenshotHandler.OnScreenshotTakingDone += ScreenShotResult;
             _screenshotHandler.TakeScreenShot();
         }
@@ -160,6 +159,22 @@ namespace Giezi.Tools
         {
             RestoreNormalGame();
         }
+        
+        
+        private void SetupGameForBugReport()
+        {
+            _previousTimeScale = Time.timeScale;
+            Time.timeScale = 0f;
+            _previousMouseLock = Cursor.lockState;
+            _previousMouseVisibility = Cursor.visible;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+
+            List<EventSystem> eventSystems = FindObjectsOfType<EventSystem>().ToList();
+            eventSystems.Remove(_thisEventSystem);
+            _eventSystemDictionary = eventSystems.ToDictionary(x => x, x => x.sendNavigationEvents);
+            eventSystems.ForEach(system => system.sendNavigationEvents = false);
+        }
 
         private void RestoreNormalGame()
         {
@@ -177,6 +192,9 @@ namespace Giezi.Tools
             
             onErrorPopup = false;
             handleInBackground = false;
+            
+            foreach (KeyValuePair<EventSystem,bool> eventSystemPair in _eventSystemDictionary)
+                eventSystemPair.Key.sendNavigationEvents = eventSystemPair.Value;
             
             Time.timeScale = _previousTimeScale;
             
