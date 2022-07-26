@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -12,11 +14,10 @@ namespace Giezi.Tools
         
         IEnumerator WaitForScreenshot()
         {
-            if (Camera.main.GetUniversalAdditionalCameraData().renderPostProcessing)
-            {
-                useRenderPipelinePostProcessing = true;
-                Camera.main.GetUniversalAdditionalCameraData().renderPostProcessing = false;
-            }
+            List<Camera> cameras = FindObjectsOfType<Camera>().ToList();
+            var camerasDictionary = cameras.ToDictionary(x => x, x => x.GetUniversalAdditionalCameraData().renderPostProcessing);
+            cameras.ForEach(cameraElement => cameraElement.GetUniversalAdditionalCameraData().renderPostProcessing = false);
+            
             yield return new WaitForEndOfFrame();
             
             Texture2D texture = ScreenCapture.CaptureScreenshotAsTexture();
@@ -26,8 +27,10 @@ namespace Giezi.Tools
             OnScreenshotTakingDone(bytearray);
             DestroyImmediate(texture);
 
-            if (useRenderPipelinePostProcessing)
-                Camera.main.GetUniversalAdditionalCameraData().renderPostProcessing = true;
+            foreach ((Camera cameraElement, bool renderPostProcessing) in camerasDictionary)
+            {
+                cameraElement.GetUniversalAdditionalCameraData().renderPostProcessing = renderPostProcessing;
+            }
         }
 
         public void TakeScreenShot() => StartCoroutine(WaitForScreenshot());
