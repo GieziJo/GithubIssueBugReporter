@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.17](https://github.com/GieziJo/GithubIssueBugReporter_private/compare/v0.0.16...v0.0.17) (2022-07-26)
+
+
+### Features
+
+* added platform to tags ([1a32653](https://github.com/GieziJo/GithubIssueBugReporter_private/commit/1a32653a52b58aebad034e81bec3841b9f5ce06f))
+
 ### [0.0.16](https://github.com/GieziJo/GithubIssueBugReporter_private/compare/v0.0.15...v0.0.16) (2022-07-26)
 
 ### [0.0.15](https://github.com/GieziJo/GithubIssueBugReporter_private/compare/v0.0.14...v0.0.15) (2022-07-26)
