@@ -27,7 +27,7 @@ namespace Giezi.Tools
         private CursorLockMode _previousMouseLock = CursorLockMode.None;
         private bool _previousMouseVisibility = true;
         [SerializeField] private EventSystem _thisEventSystem;
-        private Dictionary<EventSystem, bool> _eventSystemDictionary;
+        private Dictionary<EventSystem, (bool, bool)> _eventSystemDictionary;
 
         private void Awake()
         {
@@ -172,8 +172,9 @@ namespace Giezi.Tools
 
             List<EventSystem> eventSystems = FindObjectsOfType<EventSystem>().ToList();
             eventSystems.Remove(_thisEventSystem);
-            _eventSystemDictionary = eventSystems.ToDictionary(x => x, x => x.sendNavigationEvents);
+            _eventSystemDictionary = eventSystems.ToDictionary(x => x, x => (x.sendNavigationEvents, x.enabled));
             eventSystems.ForEach(system => system.sendNavigationEvents = false);
+            eventSystems.ForEach(system => system.enabled = false);
         }
 
         private void RestoreNormalGame()
@@ -193,8 +194,11 @@ namespace Giezi.Tools
             onErrorPopup = false;
             handleInBackground = false;
             
-            foreach (KeyValuePair<EventSystem,bool> eventSystemPair in _eventSystemDictionary)
-                eventSystemPair.Key.sendNavigationEvents = eventSystemPair.Value;
+            foreach (var (eventSystem, (sendNavigationEvents, isEnabled)) in _eventSystemDictionary)
+            {
+                eventSystem.sendNavigationEvents = sendNavigationEvents;
+                eventSystem.enabled = isEnabled;
+            }
             
             Time.timeScale = _previousTimeScale;
             
