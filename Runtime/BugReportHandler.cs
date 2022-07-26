@@ -21,6 +21,10 @@ namespace Giezi.Tools
         public static BugReportHandler Instance;
         private bool handleInBackground = false;
 
+        private float _previousTimeScale = 1f;
+        private CursorLockMode _previousMouseLock = CursorLockMode.None;
+        private bool _previousMouseVisibility = true;
+
         private void Awake()
         {
             if (Instance == null)
@@ -63,7 +67,12 @@ namespace Giezi.Tools
         private void ReportBug()
         {
             _inputsListener.ReportBugNow -= ReportBug;
+            _previousTimeScale = Time.timeScale;
             Time.timeScale = 0f;
+            _previousMouseLock = Cursor.lockState;
+            _previousMouseVisibility = Cursor.visible;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
             _screenshotHandler.OnScreenshotTakingDone += ScreenShotResult;
             _screenshotHandler.TakeScreenShot();
         }
@@ -169,7 +178,10 @@ namespace Giezi.Tools
             onErrorPopup = false;
             handleInBackground = false;
             
-            Time.timeScale = 1f;
+            Time.timeScale = _previousTimeScale;
+            
+            Cursor.lockState = _previousMouseLock;
+            Cursor.visible = _previousMouseVisibility;
         }
         
         
